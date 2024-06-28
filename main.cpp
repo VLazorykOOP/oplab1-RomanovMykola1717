@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <cmath>
@@ -111,6 +111,9 @@ namespace algorithm1 {
     }
 
     double fun(double x, double y, double z) {
+        if (x == y && y == z) {
+            return x * x + y * y + 0.33 * x * y;
+        }
         return x * x * grs(y, z) + y * y * grs(x, z) + 0.33 * x * y * grs(x, z);
     }
 }
@@ -159,5 +162,8 @@ int main() {
     catch (exceptions::WrongParameterException& e) {
         cout << "Algorithm changed to 2" << endl;
         cout << "Fun = " << algorithm2::fun(x, y, z) << endl;
+    }
+    catch (...) {
+        cout << "Unknown error occurred" << endl;
     }
 }
