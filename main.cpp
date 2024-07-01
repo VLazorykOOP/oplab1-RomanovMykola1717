@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace exceptions {
+namespace custom_exceptions {
     class NoFileException {
         string Message;
     public:
@@ -28,7 +28,7 @@ namespace algorithm1 {
 
     double T(double x, string filename) {
         ifstream fs(filename);
-        if (!fs) throw exceptions::NoFileException(filename);
+        if (!fs) throw custom_exceptions::NoFileException(filename);
 
         float Xp, Tp, Up, Xc, Tc, Uc;
         fs >> Xp >> Tp >> Up;
@@ -47,7 +47,7 @@ namespace algorithm1 {
             Tp = Tc;
             Up = Uc;
         }
-        throw exceptions::NoFileException(filename);
+        throw custom_exceptions::NoFileException(filename);
     }
 
     double T(double x) {
@@ -58,7 +58,7 @@ namespace algorithm1 {
 
     double U(double x, string filename) {
         ifstream fs(filename);
-        if (!fs) throw exceptions::NoFileException(filename);
+        if (!fs) throw custom_exceptions::NoFileException(filename);
 
         double Xp, Tp, Up, Xc, Tc, Uc;
         fs >> Xp >> Tp >> Up;
@@ -77,7 +77,7 @@ namespace algorithm1 {
             Tp = Tc;
             Up = Uc;
         }
-        throw exceptions::NoFileException(filename);
+        throw custom_exceptions::NoFileException(filename);
     }
 
     double U(double x) {
@@ -94,14 +94,14 @@ namespace algorithm1 {
     double glr(double x, double y) {
         if (abs(x) < 1) return x;
         if (abs(x) >= 1 && abs(y) < 1) return y;
-        if (sqrt(x * x + y * y - 4) < 0.1) throw exceptions::WrongParameterException();
+        if (sqrt(x * x + y * y - 4) < 0.1) throw custom_exceptions::WrongParameterException();
         return y / sqrt(x * x + y * y - 4);
     }
 
     double gold(double x, double y) {
         if (y != 0 && x > y) return x / y;
         if (x != 0 && x < y) return y / x;
-        throw exceptions::WrongParameterException();
+        throw custom_exceptions::WrongParameterException();
     }
 
     double grs(double x, double y) {
@@ -155,11 +155,11 @@ int main() {
     try {
         cout << "Fun = " << algorithm1::fun(x, y, z) << endl;
     }
-    catch (exceptions::NoFileException& e) {
+    catch (custom_exceptions::NoFileException& e) {
         cout << "Algorithm changed to 3" << endl;
         cout << "Fun = " << algorithm3::fun(x, y, z) << endl;
     }
-    catch (exceptions::WrongParameterException& e) {
+    catch (custom_exceptions::WrongParameterException& e) {
         cout << "Algorithm changed to 2" << endl;
         cout << "Fun = " << algorithm2::fun(x, y, z) << endl;
     }
